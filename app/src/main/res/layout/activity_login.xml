@@ -113,4 +113,10 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        >
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
