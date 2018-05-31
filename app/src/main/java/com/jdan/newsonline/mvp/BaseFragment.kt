@@ -2,6 +2,7 @@ package com.jdan.newsonline.mvp
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.jdan.newsonline.ui.activity.GuideActivity
+import com.jdan.newsonline.ui.activity.LoginActivity
+import com.jdan.newsonline.ui.activity.MainActivity
+import com.jdan.newsonline.util.SharedUtil
 import com.jdan.newsonline.util.ShowDialogUtils
 import com.jdan.newsonline.util.ToastUtils
 
@@ -89,9 +94,20 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
     }
 
     fun startGuideActivity() {
+        var intent = Intent(activityContext, GuideActivity::class.java)
+        startActivity(intent)
+        onBackPress()
     }
 
     fun startMainActivity() {
+        var intent = Intent(activityContext, MainActivity::class.java)
+        startActivity(intent)
+        onBackPress()
+    }
+    fun startLoginActivity() {
+        var intent = Intent(activityContext, LoginActivity::class.java)
+        startActivity(intent)
+        onBackPress()
     }
 
     fun onBackPress() {

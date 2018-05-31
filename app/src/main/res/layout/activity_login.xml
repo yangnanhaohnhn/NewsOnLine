@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/login_username_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base15dp"
+        android:layout_marginRight="@dimen/base15dp"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintTextAppearance"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
+
+        <EditText
+            android:id="@+id/activity_login_username_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/mine_uncheck"
+            android:drawablePadding="@dimen/base5dp"
+            android:hint="@string/input_login_hint"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColorHint="@color/color_8e8e8e"
+            android:textSize="@dimen/base15dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/login_password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base15dp"
+        android:layout_marginRight="@dimen/base15dp"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintTextAppearance"
+        app:layout_constraintTop_toBottomOf="@+id/login_username_layout">
+
+        <EditText
+            android:id="@+id/activity_login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/xin_uncheck"
+            android:drawablePadding="@dimen/base5dp"
+            android:hint="@string/input_pwd_hint"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColorHint="@color/color_8e8e8e"
+            android:textSize="@dimen/base15dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/forget_pwd_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/base10dp"
+        android:text="@string/forget_pwd"
+        android:textColor="@color/color_8e8e8e"
+        android:textSize="@dimen/base14dp"
+        app:layout_constraintRight_toRightOf="@+id/login_password_layout"
+        app:layout_constraintTop_toBottomOf="@+id/login_password_layout"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:layout_marginLeft="@dimen/base20dp"
+        android:layout_marginRight="@dimen/base20dp"
+        android:layout_marginTop="@dimen/base15dp"
+        android:background="@drawable/btn_b3c40000_5_bg"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/base15dp"
+        app:layout_constraintTop_toBottomOf="@+id/forget_pwd_tv" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base20dp"
+        android:layout_marginLeft="@dimen/base20dp"
+        android:layout_marginRight="@dimen/base20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn">
+
+        <View
+            style="@style/line_1dp_style"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/other_login_style"
+            android:textColor="@color/color_cbcbcb"
+            android:gravity="center"
+            android:textSize="@dimen/base14dp" />
+
+        <View
+            style="@style/line_1dp_style"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

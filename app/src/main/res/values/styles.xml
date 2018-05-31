@@ -40,6 +40,11 @@
         <item name="android:layout_height">@dimen/base10dp</item>
     </style>
 
+    <style name="line_1dp_style" parent="line_style_color">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/base1dp</item>
+    </style>
+
     <style name="mine_20dp_20dp_rl">
         <item name="android:paddingLeft">@dimen/base20dp</item>
         <item name="android:paddingRight">@dimen/base20dp</item>
@@ -70,5 +75,22 @@
         <item name="android:layout_marginLeft">@dimen/base16dp</item>
         <item name="android:layout_marginRight">@dimen/base16dp</item>
     </style>
+
+    <style name="toolbar_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/base16dp</item>
+    </style>
+    <style name="HintTextAppearance">
+        <item name="android:textSize">@dimen/base14dp</item>
+        <item name="android:textColor">@color/color_8e8e8e</item>
+    </style>
+
+    <style name="ErrorTextAppearance">
+        <item name="android:textSize">@dimen/base14dp</item>
+        <item name="android:textColor">@color/color_dd2c00</item>
+    </style>
+
 
 </resources>

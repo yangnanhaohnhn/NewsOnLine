@@ -18,4 +18,6 @@ interface BaseView{
      * 返回
      */
     fun onBackPress()
+
+    fun startLoginActivity()
 }

@@ -17,4 +17,9 @@
     <string name="update">更新</string>
     <string name="find_new_version">发现最新版本</string>
     <string name="already_new_version">已经是最新版本</string>
+    <string name="input_login_hint">请输入手机号</string>
+    <string name="input_pwd_hint">请输入密码</string>
+    <string name="forget_pwd">忘记密码?</string>
+    <string name="login">登录</string>
+    <string name="other_login_style">其他登录方式</string>
 </resources>

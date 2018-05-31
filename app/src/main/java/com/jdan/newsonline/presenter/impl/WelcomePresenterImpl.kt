@@ -64,7 +64,7 @@ class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView,
     }
 
     fun isFirstLogin():Boolean{
-       return sharedUtil!!.getBoolean(Config.IS_FIRST,true)
+       return sharedUtil!!.getBoolean(Config.IS_FIRST_LOGIN,true)
     }
 
     inner class MultiplePermissionListener: MultiplePermissionsListener {

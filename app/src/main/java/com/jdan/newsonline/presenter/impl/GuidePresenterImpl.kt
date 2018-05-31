@@ -25,7 +25,7 @@ class GuidePresenterImpl(view: IGuideView) : BasePresenterImpl<IGuideView, BaseM
             override fun onPageSelected(position: Int) {
                 if (position == mImageViewList.size - 1){
                     mImageViewList[position].setOnClickListener {
-                        sharedUtil!!.putBoolean(Config.IS_FIRST,false)
+                        sharedUtil!!.putBoolean(Config.IS_FIRST_LOGIN,false)
                         mvpView!!.startMainActivity()
                     }
                 }

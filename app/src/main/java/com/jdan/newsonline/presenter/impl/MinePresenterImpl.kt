@@ -1,7 +1,9 @@
 package com.jdan.newsonline.presenter.impl
 
+import android.graphics.Bitmap
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.bean.VersionBean
+import com.jdan.newsonline.domain.constants.Config
 import com.jdan.newsonline.domain.model.FMineModel
 import com.jdan.newsonline.domain.model.impl.MineModelImpl
 import com.jdan.newsonline.mvp.BasePresenterImpl
@@ -11,6 +13,23 @@ import com.jdan.newsonline.util.AppUtils
 import com.jdan.newsonline.widget.callback.ResCallBack
 
 class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineModel>() ,FMinePresenter {
+    /**
+     * 跳转到收藏
+     */
+    override fun startCollect() {
+        //先判断是否登录了
+         if(isLogin()){
+            //登录了
+         }else{
+             //没有登录
+             mvpView!!.startLoginActivity()
+         }
+    }
+
+    private fun isLogin(): Boolean {
+        return sharedUtil!!.getBoolean(Config.IS_LOGIN,false)
+    }
+
     override fun checkCurVersion() {
         //获取当前版本号
         mvpModel!!.checkCurVersion(object : ResCallBack<VersionBean> {

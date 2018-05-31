@@ -12,6 +12,7 @@ import android.view.View
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.jdan.newsonline.ui.activity.GuideActivity
+import com.jdan.newsonline.ui.activity.LoginActivity
 import com.jdan.newsonline.ui.activity.MainActivity
 import com.jdan.newsonline.util.ShowDialogUtils
 import com.jdan.newsonline.util.ToastUtils
@@ -120,6 +121,11 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
 
      fun startMainActivity() {
         var intent = Intent(activityContext, MainActivity::class.java)
+        startActivity(intent)
+        onBackPress()
+    }
+     fun startLoginActivity() {
+        var intent = Intent(activityContext, LoginActivity::class.java)
         startActivity(intent)
         onBackPress()
     }

@@ -34,9 +34,10 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
             , R.id.mine_update_rl)
     override fun onClick(v: View?) {
         super.onClick(v)
+
         when (id) {
             R.id.mine_collect_ll ->
-                Logger.e("shoucang")
+                mvpPresenter!!.startCollect()
             R.id.mine_night_ll ->
                 Logger.e("night")
             R.id.mine_setting_ll ->

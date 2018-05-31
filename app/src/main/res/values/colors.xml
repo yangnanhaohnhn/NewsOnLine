@@ -10,4 +10,10 @@
     <color name="color_4d4d4d">#4d4d4d</color>
     <color name="color_c81010">#c81010</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="color_b3c40000">#b3c40000</color>
+
+    <color name="color_dd2c00">#dd2c00</color>
+    <color name="color_8e8e8e">#8e8e8e</color>
+    <color name="color_cbcbcb">#cbcbcb</color>
 </resources>
