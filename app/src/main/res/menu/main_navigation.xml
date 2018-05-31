@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/main_bottom_news"
+        android:icon="@mipmap/news_uncheck"
+        android:title="@string/main_bottom_news" />
+
+    <item
+        android:id="@+id/main_bottom_video"
+        android:icon="@mipmap/video_uncheck"
+        android:title="@string/main_bottom_video" />
+
+    <item
+        android:id="@+id/main_bottom_notice"
+        android:icon="@mipmap/xin_uncheck"
+        android:title="@string/main_bottom_notice" />
+
+    <item
+        android:id="@+id/main_bottom_mine"
+        android:icon="@mipmap/mine_uncheck"
+        android:title="@string/main_bottom_mine" />
+
+</menu>

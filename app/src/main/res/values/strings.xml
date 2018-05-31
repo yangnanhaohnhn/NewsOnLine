@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">NewsOnLine</string>
+    <string name="main_bottom_news">新闻</string>
+    <string name="main_bottom_video">视频</string>
+    <string name="main_bottom_notice">关注</string>
+    <string name="main_bottom_mine">我的</string>
+
+    <string name="isNotConnect">网络未连接，请连接网络......</string>
+    <string name="need_agree_all_permission_req">需要同意所有权限请求</string>
+    <string name="login_immediately">立即登录</string>
+    <string name="setting">设置</string>
+    <string name="night">夜间</string>
+    <string name="collect">收藏</string>
+    <string name="notice">关注</string>
+    <string name="comment">评论</string>
+    <string name="feedback">反馈</string>
+    <string name="update">更新</string>
+    <string name="find_new_version">发现最新版本</string>
+    <string name="already_new_version">已经是最新版本</string>
+</resources>

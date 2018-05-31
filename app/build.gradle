@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.build_versions.compile_sdk
+    defaultConfig {
+        applicationId "com.jdan.newsonline"
+        minSdkVersion rootProject.ext.build_versions.min_sdk
+        targetSdkVersion rootProject.ext.build_versions.target_sdk
+        versionCode rootProject.ext.build_versions.vsersion_code
+        versionName rootProject.ext.build_versions.vsersion_name
+
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation rootProject.ext.support.constraint
+    implementation rootProject.ext.support.vector_drawable
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation rootProject.ext.support.runner
+    androidTestImplementation rootProject.ext.support.espresso
+    implementation rootProject.ext.support.multidex
+    implementation rootProject.ext.support.design
+
+    implementation rootProject.ext.deps.butterknife
+    kapt rootProject.ext.deps.butterknife_compiler
+
+    implementation rootProject.ext.deps.gson
+    implementation rootProject.ext.deps.retrofit
+    implementation rootProject.ext.deps.converter_gson
+    implementation rootProject.ext.deps.converter_jackson
+    implementation rootProject.ext.deps.adapter_rxjava
+    implementation rootProject.ext.deps.okhttp
+    implementation rootProject.ext.deps.logging_interceptor
+    implementation rootProject.ext.deps.rxjava
+    implementation rootProject.ext.deps.rxandroid
+    implementation rootProject.ext.deps.dexter
+    implementation rootProject.ext.deps.glide
+    implementation rootProject.ext.deps.xutils
+    implementation rootProject.ext.deps.log
+    implementation rootProject.ext.deps.convenientbanner
+
+    implementation project(':XRecyclerView')
+}
