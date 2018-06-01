@@ -8,6 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion rootProject.ext.build_versions.compile_sdk
     defaultConfig {
+        //0db54d09b1cd84460a48dcd2f2180766 签名
         applicationId "com.jdan.newsonline"
         minSdkVersion rootProject.ext.build_versions.min_sdk
         targetSdkVersion rootProject.ext.build_versions.target_sdk
@@ -30,10 +31,28 @@ android {
         }
     }
 }
+//配置Mob
 MobSDK{
     appKey "2623481198b50"
     appSecret "35a75c15eb379666ae52c166f8c3b8f0"
 
+    ShareSDK{
+        //平台配置信息
+        devInfo{
+            SinaWeibo{
+                appKey "4038290334"
+                appSecret "064903d0869cad680163db6ca36a8362"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient false
+            }
+            Wechat{}
+            QQ{}
+            WechatMoments{}
+            QZone{}
+            ShortMessage{}
+            Alipay{}
+        }
+    }
 }
 
 dependencies {

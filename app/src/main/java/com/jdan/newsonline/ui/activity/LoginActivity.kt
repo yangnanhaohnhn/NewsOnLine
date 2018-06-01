@@ -12,7 +12,6 @@ import com.jdan.newsonline.mvp.BaseActivity
 import com.jdan.newsonline.presenter.ILoginPresenter
 import com.jdan.newsonline.presenter.impl.LoginPresenterImpl
 import com.jdan.newsonline.ui.view.ILoginView
-import com.orhanobut.logger.Logger
 
 /**
  * 登录页面
@@ -37,10 +36,9 @@ class LoginActivity:BaseActivity<ILoginPresenter>(), ILoginView {
             R.id.other_login_wx_iv ->
                 mvpPresenter!!.otherLogin(Config.WX)
             R.id.other_login_qq_iv ->
-                    Logger.e("weixin")
+                mvpPresenter!!.otherLogin(Config.QQ)
             R.id.other_login_wb_iv ->
-                Logger.e("weixin")
-
+                mvpPresenter!!.otherLogin(Config.WB)
         }
     }
 

@@ -23,8 +23,6 @@ open class NOLApplication : MultiDexApplication(){
         //注册MobSDK
         MobSDK.init(this)
         getScreenSize()
-
-
         //混淆
 //        -keep class cn.sharesdk.**{*;}
 //        -keep class com.sina.**{*;}
