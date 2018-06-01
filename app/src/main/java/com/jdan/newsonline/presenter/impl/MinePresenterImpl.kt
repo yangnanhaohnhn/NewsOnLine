@@ -1,6 +1,5 @@
 package com.jdan.newsonline.presenter.impl
 
-import android.graphics.Bitmap
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.bean.VersionBean
 import com.jdan.newsonline.domain.constants.Config
@@ -11,6 +10,7 @@ import com.jdan.newsonline.presenter.FMinePresenter
 import com.jdan.newsonline.ui.view.FMineView
 import com.jdan.newsonline.util.AppUtils
 import com.jdan.newsonline.widget.callback.ResCallBack
+import com.orhanobut.logger.Logger
 
 class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineModel>() ,FMinePresenter {
     /**
@@ -32,8 +32,9 @@ class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineMod
 
     override fun checkCurVersion() {
         //获取当前版本号
-        mvpModel!!.checkCurVersion(object : ResCallBack<VersionBean> {
+        mvpModel!!.checkCurVersion(object : ResCallBack<VersionBean>() {
             override fun onSuccess(model: VersionBean) {
+                Logger.e("model :"+model.toString())
                 var code = AppUtils.getAppVersionCode() //当前的version
                 if (code < model.version!!.toInt()){
                     //更新
@@ -44,11 +45,8 @@ class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineMod
                 }
             }
 
-            override fun onFailure(msg: String?) {
+            override fun onFailure(code: Int,msg: String?) {
                 mvpView!!.showUpdateTv(R.string.already_new_version)
-            }
-
-            override fun onCompleted() {
             }
         })
     }

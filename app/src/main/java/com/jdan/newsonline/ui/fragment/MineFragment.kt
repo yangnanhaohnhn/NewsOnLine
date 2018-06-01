@@ -35,7 +35,7 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
     override fun onClick(v: View?) {
         super.onClick(v)
 
-        when (id) {
+        when (v!!.id) {
             R.id.mine_collect_ll ->
                 mvpPresenter!!.startCollect()
             R.id.mine_night_ll ->

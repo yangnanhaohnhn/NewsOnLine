@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'com.mob.sdk'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -29,6 +29,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+MobSDK{
+    appKey "2623481198b50"
+    appSecret "35a75c15eb379666ae52c166f8c3b8f0"
+
 }
 
 dependencies {

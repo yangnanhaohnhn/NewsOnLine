@@ -13,29 +13,48 @@ import butterknife.Unbinder
 import com.jdan.newsonline.ui.activity.GuideActivity
 import com.jdan.newsonline.ui.activity.LoginActivity
 import com.jdan.newsonline.ui.activity.MainActivity
-import com.jdan.newsonline.util.SharedUtil
 import com.jdan.newsonline.util.ShowDialogUtils
 import com.jdan.newsonline.util.ToastUtils
+import com.orhanobut.logger.Logger
 
 abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListener {
     protected var mvpPresenter: FP? = null
     private var dialog: Dialog? = null
     private var bind: Unbinder? = null
+    private var isCreate : Boolean = false
+    private var isCurFragment : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mvpPresenter = createFPresenter()
+        isCreate = true
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Logger.e("$isCreate | setUserVisibleHint | $isVisibleToUser")
+        if (!isCreate){
+            return
+        }
+        if (isVisibleToUser){
+            isCreate = false
+            isCurFragment = true
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(getViewId(), container, false)
         bind = ButterKnife.bind(this, view)
+        Logger.e("onCreateView")
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initData(savedInstanceState)
+        if(isCurFragment) {
+            isCurFragment = false
+            initData(savedInstanceState)
+        }
     }
 
     protected abstract fun createFPresenter(): FP

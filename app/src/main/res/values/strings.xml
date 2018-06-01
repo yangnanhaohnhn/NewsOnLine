@@ -22,4 +22,6 @@
     <string name="forget_pwd">忘记密码?</string>
     <string name="login">登录</string>
     <string name="other_login_style">其他登录方式</string>
+    <string name="no_account_imm_register">没有账号?   立即注册</string>
+    <string name="click_again_to_exit">再按一次退出新闻在线</string>
 </resources>

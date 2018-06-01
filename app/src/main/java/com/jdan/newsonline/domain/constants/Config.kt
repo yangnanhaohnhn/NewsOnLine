@@ -30,4 +30,8 @@ object Config {
     const val UNIQUEREQ = "uniqueReq"
     const val IS_FIRST_LOGIN = "isFirstLogin"//是否第一次登录
     const val IS_LOGIN = "is_login"//是否登录了
+    const val WX = "wx"
+    const val QQ = "qq"
+    const val WB = "wb"
+
 }

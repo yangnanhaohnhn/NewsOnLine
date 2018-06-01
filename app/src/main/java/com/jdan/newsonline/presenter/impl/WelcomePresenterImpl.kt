@@ -16,7 +16,6 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.orhanobut.logger.Logger
 
 class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView, IWelcomeModel>(),IWelcomePresenter {
     override fun initPermission() {
@@ -31,11 +30,11 @@ class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView,
     override fun checkCurVersion() {
         //检查当前的版本号
         mvpView!!.showLoading()
-        mvpModel!!.checkCurVersion(object : ResCallBack<VersionBean>{
+        mvpModel!!.checkCurVersion(object : ResCallBack<VersionBean>(){
             override fun onSuccess(model: VersionBean) {
                 var code = AppUtils.getAppVersionCode() //当前的version
                 if (code < model.version!!.toInt()){
-                    //更新
+                    //TODO 更新
                 }else{
                     //不更新
                     if (isFirstLogin()){
@@ -47,8 +46,7 @@ class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView,
                 }
             }
 
-            override fun onFailure(msg: String?) {
-                Logger.e("失败")
+            override fun onFailure(code: Int,msg: String?) {
                 mvpView!!.startMainActivity()
             }
 
@@ -73,7 +71,7 @@ class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView,
          }
 
          override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-             for (response in report!!.getDeniedPermissionResponses()) {
+             for (response in report!!.deniedPermissionResponses) {
                  mvpView!!.toastShow(R.string.need_agree_all_permission_req)
                  return
              }

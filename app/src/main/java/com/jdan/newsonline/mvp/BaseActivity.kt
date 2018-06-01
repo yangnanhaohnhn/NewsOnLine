@@ -5,12 +5,16 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.jdan.newsonline.R
 import com.jdan.newsonline.ui.activity.GuideActivity
 import com.jdan.newsonline.ui.activity.LoginActivity
 import com.jdan.newsonline.ui.activity.MainActivity
@@ -21,11 +25,16 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
 
     protected var mvpPresenter: P? = null
     private var dialog : Dialog? = null
-    private var bind : Unbinder? =null
+    private var bind : Unbinder? = null
+    private var exitTimeMillis: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getViewId())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
         mvpPresenter = createPresenter()
         bind = ButterKnife.bind(this)
         setStatusBarVisible(true)
@@ -61,6 +70,39 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
     protected abstract fun getViewId(): Int
 
     protected abstract fun initData(savedInstanceState: Bundle?)
+
+
+
+   private fun initToolBar(toolBar:Toolbar){
+        setSupportActionBar(toolBar)
+        if(supportActionBar != null){
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowTitleEnabled(false)
+        }
+       toolBar.setNavigationOnClickListener {
+           onBackPress()
+       }
+    }
+
+    fun initToolBar(toolBar: Toolbar,title:String) : Toolbar{
+        initToolBar(toolBar)
+        var bar_title = toolBar.findViewById<TextView>(R.id.toolbar_tv)
+        bar_title.text = title
+        return toolBar
+    }
+    fun initToolBar(toolBar: Toolbar,title:Int) : Toolbar{
+        return initToolBar(toolBar,getString(title))
+    }
+
+    fun backPressed() {
+        var curTimeMisllis = System.currentTimeMillis()
+        if(curTimeMisllis - exitTimeMillis < 2000){
+            super.onBackPressed()
+        }else{
+            exitTimeMillis = curTimeMisllis
+            toastShow(R.string.click_again_to_exit)
+        }
+    }
 
     fun showLoading() {
         loading()

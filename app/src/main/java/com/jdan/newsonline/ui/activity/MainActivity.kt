@@ -1,6 +1,5 @@
 package com.jdan.newsonline.ui.activity
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
@@ -42,5 +41,9 @@ class MainActivity: BaseActivity<IMainPresenter>(), IMainView {
 
     override val mainNavigation: BottomNavigationView
         get() = mMainNavigation
+
+    override fun onBackPressed() {
+        backPressed()
+    }
 
 }
