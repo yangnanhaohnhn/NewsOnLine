@@ -1,12 +1,14 @@
 package com.jdan.newsonline.util
 
+import java.util.regex.Pattern
+
 /**
  * Created by Cxx on 2018/3/21.
  */
 object StringUtils {
-    private fun StringUtils(){
-        throw AssertionError()
-    }
+//    private fun StringUtils(){
+//        throw AssertionError()
+//    }
 
     /**
      * get length of CharSequence
@@ -44,5 +46,12 @@ object StringUtils {
 
     fun isEquals(actual:String,expected:String):Boolean{
         return actual === expected || (if (actual == null) expected == null else actual == expected)
+    }
+    fun isPhoneNumber(phone:String):Boolean{
+        if (isEmpty(phone)){
+            return false
+        }
+        val pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$")
+        return pattern.matcher(phone).matches()
     }
 }

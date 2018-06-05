@@ -24,4 +24,12 @@
     <string name="other_login_style">其他登录方式</string>
     <string name="no_account_imm_register">没有账号?   立即注册</string>
     <string name="click_again_to_exit">再按一次退出新闻在线</string>
+    <string name="input_phone_hint">请输入手机号</string>
+    <string name="input_phone_code_hint">请输入手机验证码</string>
+    <string name="get_phone_code">获取验证码</string>
+    <string name="enter_news">进入新闻</string>
+    <string name="register">注册</string>
+    <string name="input_phone_format_error">输入手机号格式错误</string>
+    <string name="get_phone_code_error">获取验证码错误!</string>
+    <string name="phone_code_error">验证码错误!</string>
 </resources>

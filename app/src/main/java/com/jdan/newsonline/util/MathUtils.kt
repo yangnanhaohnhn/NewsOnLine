@@ -1,5 +1,8 @@
 package com.jdan.newsonline.util
 
+import android.content.Context
+import android.os.Build
+import android.provider.Settings
 import com.jdan.newsonline.domain.constants.Config
 
 object MathUtils {
@@ -23,11 +26,22 @@ object MathUtils {
             if (StringUtils.isEmpty(value)){
                 value += k
             }else{
-                value += "_"+ k
+                value += "_$k"
             }
             key += arr[k]
         }
         result = key +Config.REDUCE_SIGN + value
         return result
+    }
+
+    fun getUniqueId(context: Context):String{
+       val androidID =  Settings.Secure.getString(context.contentResolver,Settings.Secure.ANDROID_ID)
+        var id = androidID + Build.SERIAL
+        try{
+            return Md5Utils.toMD5(id)
+        }catch (e:NoSuchFieldError){
+            e.printStackTrace()
+            return id
+        }
     }
 }

@@ -21,7 +21,8 @@ class WelcomePresenterImpl(view: IWelcomeView) : BasePresenterImpl<IWelcomeView,
     override fun initPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             //之前的请求没做处理
-            Dexter.checkPermissions(MultiplePermissionListener(), "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE")
+            Dexter.checkPermissions(MultiplePermissionListener(), "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"
+            ,"android.permission.READ_PHONE_STATE")
         }else{
             checkCurVersion()
         }

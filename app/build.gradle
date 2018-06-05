@@ -53,6 +53,9 @@ MobSDK{
             Alipay{}
         }
     }
+    SMSSDK{
+
+    }
 }
 
 dependencies {

@@ -20,4 +20,9 @@ object UrlFactory {
      */
     const val CHECK_VERSION_URL = CONSTANTURL + "VersionServer?command=checkCurVersion"
 
+    /**
+     * 注册用户
+     */
+    const val REGISTER_USER_URL = CONSTANTURL + "LoginServer?command=register"
+
 }

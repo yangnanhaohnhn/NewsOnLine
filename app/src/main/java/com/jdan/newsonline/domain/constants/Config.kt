@@ -22,16 +22,23 @@ object Config {
     const val FRAGMENT_TAG_VIDEO = "fragment_tag_video"
     const val FRAGMENT_TAG_NOTICE = "fragment_tag_notice"
     const val FRAGMENT_TAG_MINE = "fragment_tag_mine"
+    const val COMMIT_SUCCESS = "commit_success"
+    const val GET_SUCCESS = "get_success"
 
 
 
 
 
-    const val UNIQUEREQ = "uniqueReq"
     const val IS_FIRST_LOGIN = "isFirstLogin"//是否第一次登录
     const val IS_LOGIN = "is_login"//是否登录了
     const val WX = "wx"
     const val QQ = "qq"
     const val WB = "wb"
+    const val COUNTRY = "86"
+   const val SEND_PHONE_CODE: Int = 0x0001
+    const val CHANGE_CODE_TIME: Int = 0x0002
 
+    const val UNIQUEREQ = "uniqueReq"
+    const val PHONE = "phone"
+    const val LOGIN_STYLE = "login_style"
 }

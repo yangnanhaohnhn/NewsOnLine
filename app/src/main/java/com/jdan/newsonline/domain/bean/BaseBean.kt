@@ -7,7 +7,8 @@ import java.io.Serializable
  */
 open class BaseBean : Serializable{
     var status: Int = 0
+    var msg : String? =null
     override fun toString(): String {
-        return "StatesBean [status=$status]"
+        return "StatesBean [status=$status + msg = $msg]"
     }
 }

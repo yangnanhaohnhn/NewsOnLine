@@ -50,7 +50,7 @@ class LoginPresenterImpl(view: ILoginView) : BasePresenterImpl<ILoginView,BaseMo
             mvpView!!.toastShow("已经授权过了")
             return
         }
-//plat.authorize();	//要功能，不要数据
+        //plat.authorize();	//要功能，不要数据
         plat.showUser(null)   //要数据不要功能，主要体现在不会重复出现授权界面
     }
 
