@@ -41,4 +41,8 @@ object Config {
     const val UNIQUEREQ = "uniqueReq"
     const val PHONE = "phone"
     const val LOGIN_STYLE = "login_style"
+   const val USERNAME = "username"
+    const val PASSWORD = "password"
+    const val USER_INFO ="user_info"
+    const val DEFAULT_PWD = "123456"
 }

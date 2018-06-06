@@ -1,22 +1,76 @@
 package com.jdan.newsonline.presenter.impl
 
+import android.support.design.widget.Snackbar
 import cn.sharesdk.framework.Platform
 import cn.sharesdk.framework.PlatformActionListener
 import cn.sharesdk.framework.ShareSDK
 import cn.sharesdk.sina.weibo.SinaWeibo
 import cn.sharesdk.tencent.qq.QQ
 import cn.sharesdk.wechat.friends.Wechat
+import com.jdan.newsonline.R
+import com.jdan.newsonline.domain.bean.inner.UserBean
 import com.jdan.newsonline.domain.constants.Config
+import com.jdan.newsonline.domain.model.ILoginModel
+import com.jdan.newsonline.domain.model.impl.LoginModelImpl
 import com.jdan.newsonline.mvp.BaseModel
 import com.jdan.newsonline.mvp.BaseModelImpl
 import com.jdan.newsonline.mvp.BasePresenterImpl
 import com.jdan.newsonline.presenter.ILoginPresenter
 import com.jdan.newsonline.ui.view.ILoginView
-import com.jdan.newsonline.util.StringUtils
+import com.jdan.newsonline.util.*
+import com.jdan.newsonline.widget.callback.ResCallBack
 import com.orhanobut.logger.Logger
 import java.util.*
+import kotlin.collections.HashMap
 
-class LoginPresenterImpl(view: ILoginView) : BasePresenterImpl<ILoginView,BaseModel>(),ILoginPresenter, PlatformActionListener {
+class LoginPresenterImpl(view: ILoginView) : BasePresenterImpl<ILoginView, ILoginModel>(),ILoginPresenter, PlatformActionListener {
+    override fun login() {
+        //登录
+        var phoneEt = mvpView!!.phoneEt
+        if (StringUtils.isEmpty(phoneEt)){
+            Snackbar.make(mvpView!!.loginConstraintLayout, R.string.input_phone_hint,Snackbar.LENGTH_LONG).show()
+            return
+        }
+        if (!StringUtils.isPhoneNumber(phoneEt)){
+            Snackbar.make(mvpView!!.loginConstraintLayout, R.string.input_phone_format_error,Snackbar.LENGTH_LONG).show()
+            return
+        }
+        var pwdEt = mvpView!!.pwdEt
+        if (StringUtils.isEmpty(mvpView!!.pwdEt)){
+            Snackbar.make(mvpView!!.loginConstraintLayout, R.string.input_pwd_hint,Snackbar.LENGTH_LONG).show()
+            return
+        }
+        mvpView!!.showLoading()
+        var params = HashMap<String,String>()
+        params.put(Config.USERNAME,phoneEt)
+        params.put(Config.PASSWORD,Md5Utils.toMD5(pwdEt))
+        params.put(Config.LOGIN_STYLE,MathUtils.getUniqueId(mvpView!!.activityContext))
+        mvpModel!!.login(params,object : ResCallBack<UserBean>(){
+            /**
+             * 成功
+             */
+            override fun onSuccess(model: UserBean) {
+                mvpView!!.toastShow(R.string.login_success)
+                //保存用户信息
+                sharedUtil!!.putBoolean(Config.IS_LOGIN,true)
+                sharedUtil!!.putString(Config.PASSWORD,Md5Utils.toMD5(pwdEt))
+                sharedUtil!!.putBean(Config.USER_INFO,JsonUtils.createJsonStr(model))
+                mvpView!!.startMainActivity()
+            }
+
+            /**
+             * 完成
+             */
+            override fun onCompleted() {
+                mvpView!!.hideLoading()
+            }
+
+            override fun onFailure(code: Int, msg: String?) {
+                ShowDialogUtils.showIOSSingleNoCallback(mvpView!!.activityContext,msg!!)
+            }
+        })
+    }
+
     override fun onComplete(p0: Platform?, p1: Int, p2: HashMap<String, Any>?) {
         Logger.e(p2.toString())
     }
@@ -55,6 +109,6 @@ class LoginPresenterImpl(view: ILoginView) : BasePresenterImpl<ILoginView,BaseMo
     }
 
     init {
-        attachView(view,BaseModelImpl())
+        attachView(view, LoginModelImpl())
     }
 }

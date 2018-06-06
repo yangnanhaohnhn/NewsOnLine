@@ -1,25 +1,22 @@
 package com.jdan.newsonline.domain.model.impl
 
-import com.jdan.newsonline.domain.bean.BaseBean
-import com.jdan.newsonline.domain.bean.StatusExplain
-import com.jdan.newsonline.domain.model.IRegisterModel
+import com.jdan.newsonline.domain.bean.inner.UserBean
+import com.jdan.newsonline.domain.bean.outer.UserBeanOut
+import com.jdan.newsonline.domain.model.ILoginModel
 import com.jdan.newsonline.mvp.BaseModelImpl
 import com.jdan.newsonline.util.MathUtils
 import com.jdan.newsonline.widget.callback.ReqResultCallBack
 import com.jdan.newsonline.widget.callback.ResCallBack
 
-/**
- * 注册
- */
-class RegisterModelImpl : BaseModelImpl(), IRegisterModel {
-    override fun registerUser(phoneStr: String, loginStyle: String, resCallBack: ResCallBack<BaseBean>) {
-        addSubscription(apiStores.registerUserReq(phoneStr,loginStyle,MathUtils.getRandomStr()),object : ReqResultCallBack<BaseBean> {
+class LoginModelImpl : BaseModelImpl(), ILoginModel {
+    override fun login(param: HashMap<String, String>, resCallBack: ResCallBack<UserBean>) {
+        addSubscription(apiStores.loginReq(param,MathUtils.getRandomStr()),object : ReqResultCallBack<UserBeanOut>{
             /**
              * 成功
              */
-            override fun onSuccess(model: BaseBean) {
+            override fun onSuccess(model: UserBeanOut) {
                 if (model.status == 0){
-                    resCallBack.onSuccess(model)
+                    resCallBack.onSuccess(model.userBean!!)
                 }else{
                     resCallBack.onFailure(model.status,model.msg)
                 }
@@ -37,4 +34,5 @@ class RegisterModelImpl : BaseModelImpl(), IRegisterModel {
             }
         })
     }
+
 }

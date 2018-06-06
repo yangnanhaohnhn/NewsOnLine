@@ -55,7 +55,7 @@ open class BaseModelImpl : BaseModel {
                 if (model.status == 0){
                     resCallBack.onSuccess(model)
                 }else{
-                    resCallBack.onFailure(model.status,StatusExplain.getItemByCode(model.status))
+                    resCallBack.onFailure(model.status,model.msg)
                 }
             }
 

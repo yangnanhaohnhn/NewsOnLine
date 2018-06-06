@@ -5,7 +5,6 @@ import android.os.Message
 import android.support.design.widget.Snackbar
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.bean.BaseBean
-import com.jdan.newsonline.domain.bean.RegisterBean
 import com.jdan.newsonline.domain.constants.Config
 import com.jdan.newsonline.domain.model.IRegisterModel
 import com.jdan.newsonline.domain.model.impl.RegisterModelImpl
@@ -13,9 +12,7 @@ import com.jdan.newsonline.listener.SmsFinishListener
 import com.jdan.newsonline.mvp.BasePresenterImpl
 import com.jdan.newsonline.presenter.IRegisterPresenter
 import com.jdan.newsonline.ui.view.IRegisterView
-import com.jdan.newsonline.util.DataUtils
-import com.jdan.newsonline.util.MathUtils
-import com.jdan.newsonline.util.StringUtils
+import com.jdan.newsonline.util.*
 import com.jdan.newsonline.widget.callback.ResCallBack
 
 class RegisterPresenterImpl(view: IRegisterView) :BasePresenterImpl<IRegisterView, IRegisterModel>(), IRegisterPresenter {
@@ -71,8 +68,21 @@ class RegisterPresenterImpl(view: IRegisterView) :BasePresenterImpl<IRegisterVie
         DataUtils.submitCode(Config.COUNTRY,phoneStr,phoneCodeStr,object : SmsFinishListener{
             override fun onSuccess(tag: String) {
                 //获取成功
-                mvpModel!!.registerUser(phoneStr,MathUtils.getUniqueId(mvpView!!.activityContext),object : ResCallBack<RegisterBean>(){
+                mvpModel!!.registerUser(phoneStr,MathUtils.getUniqueId(mvpView!!.activityContext),object : ResCallBack<BaseBean>(){
+                    override fun onSuccess(model: BaseBean) {
+                        //成功
+                        //注册成功
+                        mvpView!!.toastShow(R.string.register_success)
+                        mvpView!!.startLoginActivity()
+                    }
 
+                    override fun onFailure(code: Int,msg: String?) {
+                        Snackbar.make(mvpView!!.registerConstraintLayout,msg!!,Snackbar.LENGTH_LONG).show()
+                    }
+
+                    override fun onCompleted() {
+                        mvpView!!.hideLoading()
+                    }
                 })
             }
 

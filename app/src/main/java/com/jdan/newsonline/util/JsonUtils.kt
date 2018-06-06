@@ -4,7 +4,7 @@ import com.google.gson.Gson
 
 object JsonUtils {
 
-    fun createJsonStr(obj:Object):String{
+    fun createJsonStr(obj:Any):String{
         return Gson().toJson(obj)
     }
 

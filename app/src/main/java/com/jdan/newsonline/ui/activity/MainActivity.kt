@@ -1,5 +1,6 @@
 package com.jdan.newsonline.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
@@ -12,7 +13,10 @@ import com.jdan.newsonline.ui.view.IMainView
 import com.jdan.newsonline.util.BottomNavigationViewHelper
 
 class MainActivity: BaseActivity<IMainPresenter>(), IMainView {
-
+    override fun startModifyPwdActivity() {
+        var intent = Intent(activityContext,ModifyPwdActivity::class.java)
+        startActivity(intent)
+    }
 
     @BindView(R.id.main_vp) lateinit var mMainVp : ViewPager
     @BindView(R.id.main_navigation) lateinit var mMainNavigation : BottomNavigationView
@@ -25,6 +29,9 @@ class MainActivity: BaseActivity<IMainPresenter>(), IMainView {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        //检验当前密码是否是初始化密码
+        mvpPresenter!!.checkCurPwd()
+
         mMainNavigation.menu.getItem(0).isChecked = true
         //设置fragment
         mvpPresenter!!.createFragments(supportFragmentManager)

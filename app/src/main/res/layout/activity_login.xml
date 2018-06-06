@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login_constraint_layout"
     android:background="@color/white">
 
     <include
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
         <EditText
-            android:id="@+id/activity_login_username_et"
+            android:id="@+id/login_username_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/mine_uncheck"
@@ -46,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_username_layout">
 
         <EditText
-            android:id="@+id/activity_login_password_et"
+            android:id="@+id/login_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/xin_uncheck"

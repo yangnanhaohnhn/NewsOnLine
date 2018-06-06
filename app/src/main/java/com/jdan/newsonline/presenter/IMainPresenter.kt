@@ -10,5 +10,7 @@ interface IMainPresenter: BasePresenter {
     fun navigationItemSelectedListener(): BottomNavigationView.OnNavigationItemSelectedListener?
     fun createFragments(supportFragmentManager: FragmentManager?)
     fun onPageChangeListener(): ViewPager.OnPageChangeListener
+    //检查当前是否是否是初始化密码
+    fun checkCurPwd()
 
 }

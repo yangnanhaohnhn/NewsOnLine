@@ -32,4 +32,16 @@
     <string name="input_phone_format_error">输入手机号格式错误</string>
     <string name="get_phone_code_error">获取验证码错误!</string>
     <string name="phone_code_error">验证码错误!</string>
+    <string name="OK">OK</string>
+    <string name="register_success">注册成功!当前的初始化密码是123456,请及时更新密码!</string>
+    <string name="login_success">登录成功!正在跳转...</string>
+    <string name="please_change_pwd">请及时更改初始密码!</string>
+    <string name="input_old_pwd_hint">请输入原始密码</string>
+    <string name="input_new_pwd_hint">请输入新密码</string>
+    <string name="again_new_pwd_hint">再次输入新密码</string>
+    <string name="modify_pwd">修改密码</string>
+    <string name="not_use_init_pwd">不能使用初始化密码!</string>
+    <string name="pwd_format_error">密码的格式错误!</string>
+    <string name="pwd_format">密码长度大于6且小于16. \n 必须是字母和数字!</string>
+    <string name="not_equal_alreay_pwd">不能使用之前的密码!</string>
 </resources>

@@ -13,7 +13,7 @@ object UrlFactory {
     /**
      * 登陆url
      */
-    const val LOGIN_URL = CONSTANTURL + "UserServer?command=login"
+    const val LOGIN_URL = CONSTANTURL + "LoginServer?command=login"
 
     /**
      * 检查当前的版本号

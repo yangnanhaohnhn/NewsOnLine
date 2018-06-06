@@ -6,6 +6,7 @@ import java.util.regex.Pattern
  * Created by Cxx on 2018/3/21.
  */
 object StringUtils {
+    private var REGEX_PASSWORD = "^(?![0-9]+$)(?![A-Za-z]+$)[0-9A-Za-z]{6,16}$"
 //    private fun StringUtils(){
 //        throw AssertionError()
 //    }
@@ -53,5 +54,10 @@ object StringUtils {
         }
         val pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$")
         return pattern.matcher(phone).matches()
+    }
+
+    fun checkPwd(newPwdStr: String): Boolean {
+        val pattern = Pattern.compile(REGEX_PASSWORD)
+        return pattern.matcher(newPwdStr).matches()
     }
 }

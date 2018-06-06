@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import com.jdan.newsonline.R
+import com.jdan.newsonline.domain.bean.inner.UserBean
 import com.jdan.newsonline.domain.constants.Config
 import com.jdan.newsonline.mvp.BaseModel
 import com.jdan.newsonline.mvp.BaseModelImpl
@@ -16,9 +17,24 @@ import com.jdan.newsonline.ui.fragment.NewsFragment
 import com.jdan.newsonline.ui.fragment.NoticeFragment
 import com.jdan.newsonline.ui.fragment.VideoFragment
 import com.jdan.newsonline.ui.view.IMainView
+import com.jdan.newsonline.util.Md5Utils
+import com.jdan.newsonline.util.ShowDialogUtils
+import com.jdan.newsonline.util.StringUtils
+import com.jdan.popiosdialog.OnClickConfirmListener
 import com.orhanobut.logger.Logger
 
 class MainPresenterImpl(view: IMainView) : BasePresenterImpl<IMainView, BaseModel>(), IMainPresenter {
+    override fun checkCurPwd() {
+        var password = sharedUtil!!.getString(Config.PASSWORD,"")
+        var isLogin = sharedUtil!!.getBoolean(Config.IS_LOGIN,false)
+        if (isLogin && StringUtils.isEquals(Config.DEFAULT_PWD,password)){
+            ShowDialogUtils.showIOSSingleHasCallback(mvpView!!.activityContext,R.string.please_change_pwd, OnClickConfirmListener {
+                //跳转到修改密码
+                mvpView!!.startModifyPwdActivity()
+            })
+        }
+    }
+
     private var mFragmentList = arrayListOf<Fragment>()
 
     init {
