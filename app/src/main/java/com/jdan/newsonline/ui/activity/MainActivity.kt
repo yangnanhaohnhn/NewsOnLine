@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
+import android.view.KeyEvent
 import butterknife.BindView
 import com.jdan.newsonline.R
 import com.jdan.newsonline.mvp.BaseActivity
@@ -49,8 +50,8 @@ class MainActivity: BaseActivity<IMainPresenter>(), IMainView {
     override val mainNavigation: BottomNavigationView
         get() = mMainNavigation
 
-    override fun onBackPressed() {
-        backPressed()
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return backPressed(keyCode,event)
     }
 
 }

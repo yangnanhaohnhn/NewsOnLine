@@ -41,7 +41,7 @@ public class ToastUtils {
         ThreadManager.INSTANCE.getSinglePool().execute(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(3000);
+                SystemClock.sleep(1000);
                 synchronized (context) {
                     toast = null;
                 }

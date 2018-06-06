@@ -9,10 +9,20 @@ import com.jdan.newsonline.mvp.BasePresenterImpl
 import com.jdan.newsonline.presenter.FMinePresenter
 import com.jdan.newsonline.ui.view.FMineView
 import com.jdan.newsonline.util.AppUtils
+import com.jdan.newsonline.util.ThemeManager
 import com.jdan.newsonline.widget.callback.ResCallBack
 import com.orhanobut.logger.Logger
 
 class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineModel>() ,FMinePresenter {
+
+    override fun changeMode() {
+        if (ThemeManager.getThemeMode() == ThemeManager.ThemeMode.DAY){
+            ThemeManager.setThemeMode(ThemeManager.ThemeMode.NIGHT)
+        }else{
+            ThemeManager.setThemeMode(ThemeManager.ThemeMode.DAY)
+        }
+    }
+
     /**
      * 跳转到收藏
      */
@@ -22,7 +32,7 @@ class MinePresenterImpl(view: FMineView) : BasePresenterImpl<FMineView, FMineMod
             //登录了
          }else{
              //没有登录
-             mvpView!!.startLoginActivity()
+             mvpView!!.startLogin()
          }
     }
 

@@ -5,13 +5,13 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.View
-import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.jdan.newsonline.R
@@ -31,10 +31,6 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getViewId())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        }
         mvpPresenter = createPresenter()
         bind = ButterKnife.bind(this)
         setStatusBarVisible(true)
@@ -94,14 +90,21 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
         return initToolBar(toolBar,getString(title))
     }
 
-    fun backPressed() {
-        var curTimeMisllis = System.currentTimeMillis()
-        if(curTimeMisllis - exitTimeMillis < 2000){
-            super.onBackPressed()
-        }else{
-            exitTimeMillis = curTimeMisllis
-            toastShow(R.string.click_again_to_exit)
+    fun backPressed(keyCode:Int,event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event!!.action == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTimeMillis) > 2000) {
+                Toast.makeText(activityContext,R.string.click_again_to_exit,Toast.LENGTH_SHORT).show()
+                exitTimeMillis = System.currentTimeMillis()
+            } else {
+//                sharedUtil.putBoolean(Constant.ISEXITAPP, true);
+//                PoteApplication.getInstance().finishActivityList();
+                finish()
+                System.exit(0)
+            }
+            return true
         }
+        return super.onKeyDown(keyCode, event)
     }
 
     fun showLoading() {

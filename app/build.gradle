@@ -86,7 +86,7 @@ dependencies {
     implementation rootProject.ext.deps.xutils
     implementation rootProject.ext.deps.log
     implementation rootProject.ext.deps.convenientbanner
-
+    
     implementation 'com.github.yangnanhaohnhn:PopIOSAlertDialog:v1.0.6.6'
 
     implementation project(':XRecyclerView')

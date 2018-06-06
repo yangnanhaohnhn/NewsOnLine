@@ -21,25 +21,20 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
     protected var mvpPresenter: FP? = null
     private var dialog: Dialog? = null
     private var bind: Unbinder? = null
-    private var isCreate : Boolean = false
-    private var isCurFragment : Boolean = false
-
+    private var isViewCreate  = false
+    private var isCurFragment = false
+    //走这个 2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Logger.e("onCreate")
         mvpPresenter = createFPresenter()
-        isCreate = true
     }
 
+    //先走这个 1
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        Logger.e("$isCreate | setUserVisibleHint | $isVisibleToUser")
-        if (!isCreate){
-            return
-        }
-        if (isVisibleToUser){
-            isCreate = false
-            isCurFragment = true
-        }
+        Logger.e("isVisibleToUser:$isVisibleToUser")
+        isCurFragment = isVisibleToUser
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,12 +44,24 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        isViewCreate = true
+        lazyLoad(savedInstanceState)
+    }
+
+    private fun lazyLoad(savedInstanceState: Bundle?) {
+        if (isViewCreate && isCurFragment){
+            initData(savedInstanceState)
+
+            isViewCreate = false
+            isCurFragment =false
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(isCurFragment) {
-            isCurFragment = false
-            initData(savedInstanceState)
-        }
+
     }
 
     protected abstract fun createFPresenter(): FP
@@ -114,18 +121,18 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
 
     fun startGuideActivity() {
         var intent = Intent(activityContext, GuideActivity::class.java)
-        startActivity(intent)
+        activityContext.startActivity(intent)
         onBackPress()
     }
 
     fun startMainActivity() {
         var intent = Intent(activityContext, MainActivity::class.java)
-        startActivity(intent)
+        activityContext.startActivity(intent)
         onBackPress()
     }
     fun startLoginActivity() {
         var intent = Intent(activityContext, LoginActivity::class.java)
-        startActivity(intent)
+        activityContext.startActivity(intent)
         onBackPress()
     }
 

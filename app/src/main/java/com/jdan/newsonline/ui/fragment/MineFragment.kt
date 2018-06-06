@@ -1,22 +1,45 @@
 package com.jdan.newsonline.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import butterknife.OnClick
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.constants.Config
-import com.jdan.newsonline.mvp.*
+import com.jdan.newsonline.mvp.BaseFragment
 import com.jdan.newsonline.presenter.FMinePresenter
 import com.jdan.newsonline.presenter.impl.MinePresenterImpl
+import com.jdan.newsonline.ui.activity.LoginActivity
 import com.jdan.newsonline.ui.view.FMineView
+import com.jdan.newsonline.util.ThemeManager
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
  * 我的 fragment
  */
-class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
+class MineFragment : BaseFragment<FMinePresenter>(), FMineView, ThemeManager.OnThemeChangeListener {
+    override fun startLogin() {
+        var intent = Intent(activityContext,LoginActivity::class.java)
+        startActivity(intent)
+        onBackPress()
+    }
+
+    override fun onThemeChanged() {
+        initTheme()
+    }
+
+    fun initTheme() {
+// 设置标题栏颜色
+        // 设置状态栏颜色
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getWindow();
+//            window.setStatusBarColor(getResources().getColor(ThemeManager.getCurrentThemeRes(MainActivity.this, R.color.colorPrimary)));
+//        }
+        mine_constraint_layout.setBackgroundColor(resources.getColor(ThemeManager.getCurThemeRe(activityContext,R.color.backgroundColor_night)))
+    }
+
     override fun showUpdateTv(msg: Int) {
         mine_update_tv.text = getString(msg)
     }
@@ -39,7 +62,7 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
             R.id.mine_collect_ll ->
                 mvpPresenter!!.startCollect()
             R.id.mine_night_ll ->
-                Logger.e("night")
+                mine_constraint_layout.setBackgroundColor(resources.getColor(R.color.backgroundColor_night))
             R.id.mine_setting_ll ->
                 Logger.e("setting")
             R.id.mine_notice_rl ->
@@ -57,6 +80,8 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
 
         //获取当前的版本号
         mvpPresenter!!.checkCurVersion()
+
+        ThemeManager.registerThemeChangeListener(this)
     }
 
 
@@ -68,5 +93,10 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    override fun onDestroy() {
+        ThemeManager.unRegisterThemeChangeListener(this)
+        super.onDestroy()
     }
 }
