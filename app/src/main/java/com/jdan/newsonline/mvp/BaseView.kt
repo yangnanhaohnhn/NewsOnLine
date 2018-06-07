@@ -14,10 +14,9 @@ interface BaseView{
 
     fun startMainActivity()
     fun startGuideActivity()
+    fun startLoginActivity()
     /**
      * 返回
      */
     fun onBackPress()
-
-    fun startLoginActivity()
 }

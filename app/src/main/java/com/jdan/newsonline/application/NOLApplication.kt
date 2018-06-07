@@ -2,6 +2,7 @@ package com.jdan.newsonline.application
 
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import android.support.v7.app.AppCompatDelegate
 import android.view.WindowManager
 import com.jdan.newsonline.util.AppUtils
 import com.mob.MobSDK
@@ -23,6 +24,8 @@ open class NOLApplication : MultiDexApplication(){
         //注册MobSDK
         MobSDK.init(this)
         getScreenSize()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         //混淆
 //        -keep class cn.sharesdk.**{*;}
 //        -keep class com.sina.**{*;}

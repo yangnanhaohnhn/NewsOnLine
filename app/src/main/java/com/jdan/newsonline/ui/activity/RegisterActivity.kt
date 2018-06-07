@@ -16,6 +16,7 @@ import com.jdan.newsonline.mvp.BaseActivity
 import com.jdan.newsonline.presenter.IRegisterPresenter
 import com.jdan.newsonline.presenter.impl.RegisterPresenterImpl
 import com.jdan.newsonline.ui.view.IRegisterView
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * 立即注册
@@ -25,8 +26,6 @@ class RegisterActivity:BaseActivity<IRegisterPresenter>(), IRegisterView {
 
 
     @BindView(R.id.register_constraint_layout) lateinit var mRegisterConstraintLayout: ConstraintLayout
-    @BindView(R.id.appToolBar) lateinit var toolbar: Toolbar
-
     @BindView(R.id.register_phone_et) lateinit var mRegisterPhoneEt : EditText
     @BindView(R.id.register_code_et) lateinit var mRegisterCodeEt : EditText
 
@@ -47,14 +46,14 @@ class RegisterActivity:BaseActivity<IRegisterPresenter>(), IRegisterView {
             R.id.get_phone_code_btn ->
                 //获取验证码
                 mvpPresenter!!.getPhoneCode()
-                R.id.enter_news_btn ->
-                        mvpPresenter!!.enterNews()
+            R.id.enter_news_btn ->
+                mvpPresenter!!.enterNews()
                 //进入新闻
         }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        initToolBar(toolbar,R.string.register)
+        initToolBar(toolBar,toolbar_tv,R.string.register,true)
     }
 
     override val mRegisterPhone: String

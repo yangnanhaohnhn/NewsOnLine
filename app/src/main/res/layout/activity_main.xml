@@ -8,16 +8,17 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/main_vp"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/main_navigation"
-        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main_navigation"></android.support.v4.view.ViewPager>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:itemTextColor="@drawable/main_bottom_text_color_selector"
+        android:background="@color/navigationColor"
         app:itemIconTint="@drawable/main_bottom_text_color_selector"
+        app:itemTextColor="@drawable/main_bottom_text_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_navigation" />
 

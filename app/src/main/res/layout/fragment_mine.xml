@@ -99,7 +99,8 @@
                 android:layout_marginBottom="@dimen/base6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/setting" />
+                android:src="@mipmap/setting"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:layout_marginTop="@dimen/base6dp"

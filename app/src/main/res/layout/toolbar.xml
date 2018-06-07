@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/appToolBar"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="@color/white"
-    app:navigationIcon="@mipmap/black_back">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/toolbar_tv"
-        style="@style/toolbar_tv"
-        android:gravity="center"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/base5dp"
+        app:navigationIcon="@mipmap/black_back">
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/toolbar_tv"
+            style="@style/toolbar_tv"
+            android:layout_gravity="center" />
 
-</android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        style="@style/line_1dp_style"/>
+
+</android.support.constraint.ConstraintLayout>
+

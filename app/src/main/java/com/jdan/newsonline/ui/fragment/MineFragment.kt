@@ -1,13 +1,16 @@
 package com.jdan.newsonline.ui.fragment
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import butterknife.OnClick
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.constants.Config
+import com.jdan.newsonline.mvp.BaseActivity
 import com.jdan.newsonline.mvp.BaseFragment
+import com.jdan.newsonline.mvp.BasePresenter
 import com.jdan.newsonline.presenter.FMinePresenter
 import com.jdan.newsonline.presenter.impl.MinePresenterImpl
 import com.jdan.newsonline.ui.activity.LoginActivity
@@ -20,11 +23,6 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  * 我的 fragment
  */
 class MineFragment : BaseFragment<FMinePresenter>(), FMineView, ThemeManager.OnThemeChangeListener {
-    override fun startLogin() {
-        var intent = Intent(activityContext,LoginActivity::class.java)
-        startActivity(intent)
-        onBackPress()
-    }
 
     override fun onThemeChanged() {
         initTheme()
@@ -62,7 +60,8 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView, ThemeManager.OnT
             R.id.mine_collect_ll ->
                 mvpPresenter!!.startCollect()
             R.id.mine_night_ll ->
-                mine_constraint_layout.setBackgroundColor(resources.getColor(R.color.backgroundColor_night))
+                changeTheme()
+//                mine_constraint_layout.setBackgroundColor(resources.getColor(R.color.backgroundColor_night))
             R.id.mine_setting_ll ->
                 Logger.e("setting")
             R.id.mine_notice_rl ->
@@ -76,6 +75,13 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView, ThemeManager.OnT
         }
     }
 
+    private fun changeTheme() {
+        var uiMode = resources.configuration.uiMode
+        var nightMask = Configuration.UI_MODE_NIGHT_MASK
+        var activity = activityContext as BaseActivity<*>
+        activity.changeMode(uiMode and nightMask)
+    }
+
     override fun initData(savedInstanceState: Bundle?) {
 
         //获取当前的版本号
@@ -83,7 +89,10 @@ class MineFragment : BaseFragment<FMinePresenter>(), FMineView, ThemeManager.OnT
 
         ThemeManager.registerThemeChangeListener(this)
     }
-
+    override fun startLogin() {
+        var intent = Intent(activityContext, LoginActivity::class.java)
+        activityContext.startActivity(intent)
+    }
 
     companion object {
         fun newInstance(tag: String): Fragment {

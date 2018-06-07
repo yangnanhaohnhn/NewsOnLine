@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_modify_pwd_layout.*
 
 class ModifyPwdActivity : BaseActivity<IModifyPresenter>(), IModifyView {
 
-    @BindView(R.id.modify_pwd_toolbar_layout) lateinit var mModifyPwdToolBar : Toolbar
+//    @BindView(R.id.modify_pwd_toolbar_layout) lateinit var mModifyPwdToolBar : Toolbar
 
     override fun createPresenter(): IModifyPresenter {
         return ModifyPwdPresenterImpl(this)
@@ -34,7 +34,7 @@ class ModifyPwdActivity : BaseActivity<IModifyPresenter>(), IModifyView {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        initToolBar(mModifyPwdToolBar,R.string.modify_pwd)
+//        initToolBar(mModifyPwdToolBar,R.string.modify_pwd)
     }
 
     override val oldPwdStr : String

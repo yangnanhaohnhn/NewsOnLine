@@ -7,6 +7,8 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.View
@@ -19,7 +21,9 @@ import com.jdan.newsonline.ui.activity.GuideActivity
 import com.jdan.newsonline.ui.activity.LoginActivity
 import com.jdan.newsonline.ui.activity.MainActivity
 import com.jdan.newsonline.util.ShowDialogUtils
+import com.jdan.newsonline.util.StringUtils
 import com.jdan.newsonline.util.ToastUtils
+import xyz.geminiwen.skinsprite.app.SkinnableActivity
 
 abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnClickListener {
 
@@ -69,26 +73,39 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
 
 
 
-   private fun initToolBar(toolBar:Toolbar){
-        setSupportActionBar(toolBar)
-        if(supportActionBar != null){
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setDisplayShowTitleEnabled(false)
-        }
+//   private fun initToolBar(toolBar:Toolbar){
+//        setSupportActionBar(toolBar)
+//        if(supportActionBar != null){
+//            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//            supportActionBar!!.setDisplayShowTitleEnabled(false)
+//        }
+//       toolBar.setNavigationOnClickListener {
+//           onBackPress()
+//       }
+//    }
+
+  private fun initToolBar(toolBar: Toolbar){
+       setSupportActionBar(toolBar)
+       supportActionBar!!.setDisplayShowTitleEnabled(false)
+   }
+
+   fun initToolBar(toolBar: Toolbar,textView: AppCompatTextView,title:String,isBack:Boolean){
+      initToolBar(toolBar)
+       supportActionBar!!.setDisplayHomeAsUpEnabled(isBack)
+
+       if (!StringUtils.isEmpty(title)){
+           textView.text = title
+       }
+
        toolBar.setNavigationOnClickListener {
            onBackPress()
        }
-    }
+   }
 
-    fun initToolBar(toolBar: Toolbar,title:String) : Toolbar{
-        initToolBar(toolBar)
-        var bar_title = toolBar.findViewById<TextView>(R.id.toolbar_tv)
-        bar_title.text = title
-        return toolBar
-    }
-    fun initToolBar(toolBar: Toolbar,title:Int) : Toolbar{
-        return initToolBar(toolBar,getString(title))
-    }
+   fun initToolBar(toolBar: Toolbar,textView: AppCompatTextView,title:Int,isBack:Boolean){
+      initToolBar(toolBar,textView, activityContext.getString(title),isBack)
+   }
+
 
     fun backPressed(keyCode:Int,event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK
@@ -182,6 +199,14 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
         }
 
         super.onDestroy()
+    }
+
+     fun changeMode(i: Int){
+        if ( i == AppCompatDelegate.MODE_NIGHT_YES){
+            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 }

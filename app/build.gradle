@@ -88,6 +88,7 @@ dependencies {
     implementation rootProject.ext.deps.convenientbanner
     
     implementation 'com.github.yangnanhaohnhn:PopIOSAlertDialog:v1.0.6.6'
+    implementation 'com.github.geminiwen:SkinSprite:v1.1'
 
     implementation project(':XRecyclerView')
 }
