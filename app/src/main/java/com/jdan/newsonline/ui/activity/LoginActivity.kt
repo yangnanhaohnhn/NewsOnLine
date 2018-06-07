@@ -3,13 +3,11 @@ package com.jdan.newsonline.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.Toolbar
 import android.view.View
-import butterknife.BindView
 import butterknife.OnClick
 import com.jdan.newsonline.R
 import com.jdan.newsonline.domain.constants.Config
-import com.jdan.newsonline.mvp.*
+import com.jdan.newsonline.mvp.BaseActivity
 import com.jdan.newsonline.presenter.ILoginPresenter
 import com.jdan.newsonline.presenter.impl.LoginPresenterImpl
 import com.jdan.newsonline.ui.view.ILoginView
@@ -41,7 +39,8 @@ class LoginActivity:BaseActivity<ILoginPresenter>(), ILoginView {
         when(v!!.id){
             R.id.imm_register_rl ->
                     //注册
-                startRegister()
+//                startRegister()
+                changeMode()
             R.id.other_login_wx_iv ->
                 mvpPresenter!!.otherLogin(Config.WX)
             R.id.other_login_qq_iv ->
@@ -53,6 +52,19 @@ class LoginActivity:BaseActivity<ILoginPresenter>(), ILoginView {
         }
     }
 
+    private fun changeMode() {
+//        var isNight = SharedUtil.getInstance(this).getBoolean(Config.IS_NIGHT,false)
+//        if (isNight){
+//            //当前是夜间的,切换到日间
+//            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            SharedUtil.getInstance(activityContext).putBoolean(Config.IS_NIGHT,false)
+//        }else{
+//            //当前是日间,切换到夜间
+//            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            SharedUtil.getInstance(activityContext).putBoolean(Config.IS_NIGHT,true)
+//        }
+    }
+
     private fun startRegister() {
         var intent = Intent(activityContext,RegisterActivity::class.java)
         startActivity(intent)
@@ -61,6 +73,7 @@ class LoginActivity:BaseActivity<ILoginPresenter>(), ILoginView {
     override fun initData(savedInstanceState: Bundle?) {
 
         initToolBar(toolBar,toolbar_tv,R.string.login,true)
+
     }
 
 }

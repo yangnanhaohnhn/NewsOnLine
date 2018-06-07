@@ -7,12 +7,10 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -23,22 +21,40 @@ import com.jdan.newsonline.ui.activity.MainActivity
 import com.jdan.newsonline.util.ShowDialogUtils
 import com.jdan.newsonline.util.StringUtils
 import com.jdan.newsonline.util.ToastUtils
-import xyz.geminiwen.skinsprite.app.SkinnableActivity
 
 abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnClickListener {
 
     protected var mvpPresenter: P? = null
-    private var dialog : Dialog? = null
-    private var bind : Unbinder? = null
+    private var dialog: Dialog? = null
+    private var bind: Unbinder? = null
     private var exitTimeMillis: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(getViewId())
         mvpPresenter = createPresenter()
         bind = ButterKnife.bind(this)
         setStatusBarVisible(true)
         initData(savedInstanceState)
+
+//        var isNight = SharedUtil.getInstance(this).getBoolean(Config.IS_NIGHT, false)
+//        if (isNight) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        var isNight = SharedUtil.getInstance(this).getBoolean(Config.IS_NIGHT, false)
+//        if (isNight) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
     }
 
     /**
@@ -72,7 +88,6 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
     protected abstract fun initData(savedInstanceState: Bundle?)
 
 
-
 //   private fun initToolBar(toolBar:Toolbar){
 //        setSupportActionBar(toolBar)
 //        if(supportActionBar != null){
@@ -84,34 +99,34 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
 //       }
 //    }
 
-  private fun initToolBar(toolBar: Toolbar){
-       setSupportActionBar(toolBar)
-       supportActionBar!!.setDisplayShowTitleEnabled(false)
-   }
+    private fun initToolBar(toolBar: Toolbar) {
+        setSupportActionBar(toolBar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+    }
 
-   fun initToolBar(toolBar: Toolbar,textView: AppCompatTextView,title:String,isBack:Boolean){
-      initToolBar(toolBar)
-       supportActionBar!!.setDisplayHomeAsUpEnabled(isBack)
+    fun initToolBar(toolBar: Toolbar, textView: AppCompatTextView, title: String, isBack: Boolean) {
+        initToolBar(toolBar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(isBack)
 
-       if (!StringUtils.isEmpty(title)){
-           textView.text = title
-       }
+        if (!StringUtils.isEmpty(title)) {
+            textView.text = title
+        }
 
-       toolBar.setNavigationOnClickListener {
-           onBackPress()
-       }
-   }
+        toolBar.setNavigationOnClickListener {
+            onBackPress()
+        }
+    }
 
-   fun initToolBar(toolBar: Toolbar,textView: AppCompatTextView,title:Int,isBack:Boolean){
-      initToolBar(toolBar,textView, activityContext.getString(title),isBack)
-   }
+    fun initToolBar(toolBar: Toolbar, textView: AppCompatTextView, title: Int, isBack: Boolean) {
+        initToolBar(toolBar, textView, activityContext.getString(title), isBack)
+    }
 
 
-    fun backPressed(keyCode:Int,event: KeyEvent?): Boolean {
+    fun backPressed(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event!!.action == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTimeMillis) > 2000) {
-                Toast.makeText(activityContext,R.string.click_again_to_exit,Toast.LENGTH_SHORT).show()
+                Toast.makeText(activityContext, R.string.click_again_to_exit, Toast.LENGTH_SHORT).show()
                 exitTimeMillis = System.currentTimeMillis()
             } else {
 //                sharedUtil.putBoolean(Constant.ISEXITAPP, true);
@@ -138,7 +153,7 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
     /**
      * loading...
      */
-     private fun loading() {
+    private fun loading() {
         dialog = ShowDialogUtils.createLoading(activityContext)
         dialog!!.show()
     }
@@ -175,18 +190,19 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
         return res
     }
 
-     fun startGuideActivity() {
+    fun startGuideActivity() {
         var intent = Intent(activityContext, GuideActivity::class.java)
         startActivity(intent)
         onBackPress()
     }
 
-     fun startMainActivity() {
+    fun startMainActivity() {
         var intent = Intent(activityContext, MainActivity::class.java)
         startActivity(intent)
         onBackPress()
     }
-     fun startLoginActivity() {
+
+    fun startLoginActivity() {
         var intent = Intent(activityContext, LoginActivity::class.java)
         startActivity(intent)
         onBackPress()
@@ -199,14 +215,6 @@ abstract class BaseActivity<P : BasePresenter> : AppCompatActivity(), View.OnCli
         }
 
         super.onDestroy()
-    }
-
-     fun changeMode(i: Int){
-        if ( i == AppCompatDelegate.MODE_NIGHT_YES){
-            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }else{
-            delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
     }
 
 }

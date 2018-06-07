@@ -13,6 +13,7 @@ open class BasePresenterImpl<V : BaseView, M : BaseModel> : BasePresenter {
         mvpModel!!.detachObservable()
     }
 
+
     /**
      * 初始化
      */

@@ -4,7 +4,9 @@ import android.content.Context
 import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import android.view.WindowManager
+import com.jdan.newsonline.domain.constants.Config
 import com.jdan.newsonline.util.AppUtils
+import com.jdan.newsonline.util.SharedUtil
 import com.mob.MobSDK
 
 open class NOLApplication : MultiDexApplication(){
@@ -26,6 +28,7 @@ open class NOLApplication : MultiDexApplication(){
         getScreenSize()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        SharedUtil.getInstance(this).putBoolean(Config.IS_NIGHT,false)
         //混淆
 //        -keep class cn.sharesdk.**{*;}
 //        -keep class com.sina.**{*;}

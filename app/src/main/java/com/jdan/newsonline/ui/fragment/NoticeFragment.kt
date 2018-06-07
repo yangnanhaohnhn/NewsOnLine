@@ -10,6 +10,10 @@ import com.jdan.newsonline.mvp.*
  * 关注fragment
  */
 class NoticeFragment:BaseFragment<BasePresenter>(),BaseView {
+    override fun initThemeMode(night: Boolean) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun createFPresenter(): BasePresenter {
         return BasePresenterImpl<BaseView,BaseModel>()
     }

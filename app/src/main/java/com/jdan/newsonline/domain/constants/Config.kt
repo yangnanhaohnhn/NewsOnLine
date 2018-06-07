@@ -45,4 +45,6 @@ object Config {
     const val PASSWORD = "password"
     const val USER_INFO ="user_info"
     const val DEFAULT_PWD = "123456"
+    const val IS_NIGHT = "is_night"
+    var IS_CHANGE_MODE = false//是否改变模式
 }

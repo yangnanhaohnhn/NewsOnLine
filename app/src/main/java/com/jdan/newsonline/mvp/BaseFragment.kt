@@ -30,10 +30,15 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
     }
 
     //先走这个 1
-//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-//        super.setUserVisibleHint(isVisibleToUser)
-////        isCurFragment = isVisibleToUser
-//    }
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+//        isCurFragment = isVisibleToUser
+//        if (isVisibleToUser){
+//            isNight =  SharedUtil.getInstance(activity).getBoolean(Config.IS_NIGHT,false)
+//        }
+    }
+
+    abstract fun initThemeMode(night: Boolean)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(getViewId(), container, false)
@@ -41,11 +46,14 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
         return view
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-////        isViewCreate = true
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        isViewCreate = true
 //        lazyLoad(savedInstanceState)
-//    }
+        Logger.e("onViewCreated")
+//        var isNight = SharedUtil.getInstance(activity).getBoolean(Config.IS_NIGHT,false)
+        initThemeMode(false)
+    }
 
 //    private fun lazyLoad(savedInstanceState: Bundle?) {
 //        if (isViewCreate && isCurFragment){
@@ -58,8 +66,10 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         initData(savedInstanceState)
     }
+
 
     protected abstract fun createFPresenter(): FP
 
@@ -67,6 +77,17 @@ abstract class BaseFragment<FP : BasePresenter> : Fragment(), View.OnClickListen
 
     protected abstract fun initData(savedInstanceState: Bundle?)
 
+
+//    override fun onStart() {
+//        super.onStart()
+//        var isNight = SharedUtil.getInstance(activityContext).getBoolean(Config.IS_NIGHT, false)
+//        if (isNight) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
+////        activityContext.recreate()
+//    }
     /**
      * 是否隐藏,显示
      *

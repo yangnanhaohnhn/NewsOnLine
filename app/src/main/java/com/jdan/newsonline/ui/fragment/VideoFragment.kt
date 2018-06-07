@@ -10,6 +10,10 @@ import com.jdan.newsonline.mvp.*
  * 视频fragment
  */
 class VideoFragment:BaseFragment<BasePresenter>(), BaseView {
+    override fun initThemeMode(night: Boolean) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun createFPresenter(): BasePresenter {
         return BasePresenterImpl<BaseView,BaseModel>()
     }

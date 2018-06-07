@@ -13,6 +13,9 @@ import com.jdan.newsonline.ui.view.FNewsView
  * 新闻fragment
  */
 class NewsFragment:BaseFragment<FNewsPresenter>(), FNewsView {
+    override fun initThemeMode(night: Boolean) {
+
+    }
 
     override fun createFPresenter(): FNewsPresenter {
         return NewsPresenterImpl(this)
